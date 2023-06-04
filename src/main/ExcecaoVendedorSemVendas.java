@@ -1,6 +1,5 @@
 package main;
 
-
 class ExcecaoVendedorSemVendas extends Exception {
 
     public ExcecaoVendedorSemVendas(String mensagem) {

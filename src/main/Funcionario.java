@@ -1,6 +1,5 @@
 package main;
 
-
 import java.io.*;
 
 abstract class Funcionario implements Serializable{
@@ -15,22 +14,6 @@ abstract class Funcionario implements Serializable{
         this.data_nascimento = data_nascimento;
         this.departamento = departamento;
         departamento.adicionarFuncionario(this);
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public double getSalario() {
-        return salario;
-    }
-
-    public String getDataNascimento() {
-        return data_nascimento;
-    }
-
-    public Departamento getDepartamento() {
-        return departamento;
     }
 
     public double calcularSalarioAnual(){
@@ -48,4 +31,36 @@ abstract class Funcionario implements Serializable{
     }
 
     public abstract double calcularSalario();
+
+    //GETTERS:
+
+    public String getNome() {
+        return nome;
+    }
+
+    public double getSalario() {
+        return salario;
+    }
+
+    public String getDataNascimento() {
+        return data_nascimento;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+    
+    //SETTERS:
+    
+    public void setNome(String nome) {
+    	this.nome = nome;
+    }
+    
+    public void setSalario(double salario) {
+    	this.salario = salario;
+    }
+    
+    public void setDataNascimento(String data_nascimento) {
+    	this.data_nascimento = data_nascimento;
+    }
 }

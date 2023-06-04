@@ -1,8 +1,8 @@
 package main;
 
+import java.util.Date;
 
 public class Gerente extends Funcionario {
-    private Departamento departamento;
     private double bonus;
 
     public Gerente(String nome, double salario, String data_nascimento, Departamento departamento, double bonus) {
@@ -17,5 +17,17 @@ public class Gerente extends Funcionario {
     
     public double calcularSalario() {
         return getSalario() + bonus;
+    }
+    
+    //GETTER:
+    
+    public double getBonus() {
+    	return bonus;
+    }
+    
+    //SETTER:
+    
+    public void setBonus(double bonus) {
+    	this.bonus = bonus;
     }
 }

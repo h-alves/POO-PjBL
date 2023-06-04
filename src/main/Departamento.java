@@ -60,7 +60,7 @@ public class Departamento {
         return total_vendas/vendedores.size();
     }
     
-    //Getters
+    //GETTERS:
     
     public String getNome(){
     	return nome;
@@ -72,5 +72,11 @@ public class Departamento {
 
     public ArrayList<Vendedor> getVendedores(){
         return vendedores;
+    }
+    
+    //SETTERS:
+    
+    public void setNome(String nome) {
+    	this.nome = nome;
     }
 }

@@ -1,18 +1,18 @@
 package main;
 
-
 import java.io.*;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
         Departamento d1 = new Departamento("posto de gasosa");
         Departamento d2 = new Departamento("lojinha da cacau show");
         
-        Gerente g1 = new Gerente("Vinicius",100,"01/01/01",d1,1000);
-        Vendedor v1 = new Vendedor("Pedrao",100,"01/01/01",d1,200,12);
-        Gerente g2 = new Gerente("Hask",150,"01/01/01",d1,1000);
-        Gerente g3 = new Gerente("Julia",30,"01/01/01",d1,200);
-        Vendedor v2 = new Vendedor("Bruno",150,"01/01/01",d1,200,12);
+        Gerente g1 = new Gerente("Vinicius",100,"01-01-01",d1,1000);
+        Vendedor v1 = new Vendedor("Pedrao",100,"01-01-01",d1,200,12);
+        Gerente g2 = new Gerente("Hask",150,"01-01-01",d1,1000);
+        Gerente g3 = new Gerente("Julia",30,"01-01-01",d1,200);
+        Vendedor v2 = new Vendedor("Bruno",150,"01-01-01",d1,200,12);
         
         d1.listarFuncionarios();
         
@@ -46,7 +46,7 @@ public class Main {
         d1.listarFuncionarios();
         d2.listarFuncionarios();
         
-        FolhaPagamento f1 = new FolhaPagamento("janeiro");
+        FolhaPagamento f1 = new FolhaPagamento(Mes.JANEIRO);
         
         f1.calcularTotalSalarios(d1);
         

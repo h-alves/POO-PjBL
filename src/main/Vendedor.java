@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Date;
 
 public class Vendedor extends Funcionario {
     private double valor_vendas;
@@ -30,5 +31,25 @@ public class Vendedor extends Funcionario {
     		throw new ExcecaoVendedorSemVendas();
     	
     	return (valor_vendas / num_vendas);
+    }
+    
+    //GETTERS:
+    
+    public double getValorVendas() {
+    	return valor_vendas;
+    }
+    
+    public int getNumVendas() {
+    	return num_vendas;
+    }
+    
+    //SETTERS:
+    
+    public void setValorVendas(double valor_vendas) {
+    	this.valor_vendas = valor_vendas;
+    }
+    
+    public void setNumVendas(int num_vendas) {
+    	this.num_vendas = num_vendas;
     }
 }
