@@ -1,8 +1,13 @@
 package main;
 
+import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class FolhaPagamento {
+public class FolhaPagamento implements Serializable {
 	private Mes mes;
     private double total_salarios;
 
@@ -46,4 +51,29 @@ public class FolhaPagamento {
     public void setTotalSalarios(double total_salarios) {
     	this.total_salarios = total_salarios;
     }
+
+    //Funções das persistencias
+
+    public void salvar(String nome_arquivo) throws IOException {
+        FileOutputStream arquivo = new FileOutputStream(nome_arquivo);
+        ObjectOutputStream gravador = new ObjectOutputStream(arquivo);
+
+        gravador.writeObject(this);
+
+        gravador.close();
+        arquivo.close();
+    }
+
+    public static FolhaPagamento abrir(String nome_arquivo) throws IOException, ClassNotFoundException {
+        FolhaPagamento folhaPagamento = null;
+
+        FileInputStream arquivo = new FileInputStream(nome_arquivo);
+        ObjectInputStream restaurador = new ObjectInputStream(arquivo);
+
+        folhaPagamento = (FolhaPagamento) restaurador.readObject();
+        restaurador.close();
+        arquivo.close();
+        return folhaPagamento;
+    }
+
 }

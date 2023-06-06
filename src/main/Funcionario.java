@@ -2,11 +2,11 @@ package main;
 
 import java.io.*;
 
-abstract class Funcionario implements Serializable{
-    private String nome;
-    private double salario;
-    private String data_nascimento;
-    private Departamento departamento;
+abstract class Funcionario {
+    transient private String nome;
+    transient private double salario;
+    transient private String data_nascimento;
+    transient private Departamento departamento;
 
     public Funcionario(String nome, double salario, String data_nascimento, Departamento departamento) {
         this.nome = nome; 
@@ -63,4 +63,5 @@ abstract class Funcionario implements Serializable{
     public void setDataNascimento(String data_nascimento) {
     	this.data_nascimento = data_nascimento;
     }
+    
 }

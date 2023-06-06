@@ -1,8 +1,10 @@
 package main;
 
+import java.io.*;
+import java.sql.Time;
 import java.util.ArrayList;
 
-public class Departamento {
+public class Departamento implements Serializable {
     private String nome;
     private ArrayList<Gerente> gerentes;
     private ArrayList<Vendedor> vendedores;
@@ -79,4 +81,27 @@ public class Departamento {
     public void setNome(String nome) {
     	this.nome = nome;
     }
+
+    //Funções das persistencias
+
+    public void salvar(String nome_arquivo) throws IOException {
+        FileOutputStream arquivo = new FileOutputStream(nome_arquivo);
+        ObjectOutputStream gravador = new ObjectOutputStream(arquivo);
+        gravador.writeObject(this);
+        gravador.close();
+        arquivo.close();
+    }
+
+    public static Departamento abrir(String nome_arquivo) throws IOException, ClassNotFoundException {
+        Departamento departamento = null;
+        FileInputStream arquivo = new FileInputStream(nome_arquivo);
+        ObjectInputStream restaurador = new ObjectInputStream(arquivo);
+        departamento = (Departamento) restaurador.readObject();
+
+        restaurador.close();
+        arquivo.close();
+
+        return departamento;
+    }
+
 }

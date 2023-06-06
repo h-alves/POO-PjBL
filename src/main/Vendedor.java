@@ -1,8 +1,9 @@
 package main;
 
+import java.io.*;
 import java.util.Date;
 
-public class Vendedor extends Funcionario {
+public class Vendedor extends Funcionario implements Serializable {
     private double valor_vendas;
     private int num_vendas;
 
@@ -52,4 +53,30 @@ public class Vendedor extends Funcionario {
     public void setNumVendas(int num_vendas) {
     	this.num_vendas = num_vendas;
     }
+
+
+    //Funções das persistencias
+
+    public void salvar(String nome_arquivo) throws IOException {
+        FileOutputStream arquivo = new FileOutputStream(nome_arquivo);
+        ObjectOutputStream gravador = new ObjectOutputStream(arquivo);
+
+        gravador.writeObject(this);
+
+        gravador.close();
+        arquivo.close();
+    }
+
+    public static Vendedor abrir(String nome_arquivo) throws IOException, ClassNotFoundException {
+        Vendedor vendedor = null;
+
+        FileInputStream arquivo = new FileInputStream(nome_arquivo);
+        ObjectInputStream restaurador = new ObjectInputStream(arquivo);
+
+        vendedor = (Vendedor) restaurador.readObject();
+        restaurador.close();
+        arquivo.close();
+        return vendedor;
+    }
+
 }
