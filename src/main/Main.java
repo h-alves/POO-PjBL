@@ -1,8 +1,5 @@
 package main;
 
-import java.io.*;
-import java.util.Date;
-
 public class Main {
     public static void main(String[] args) {
         Departamento d1 = new Departamento("posto de gasosa");
@@ -46,9 +43,9 @@ public class Main {
         d1.listarFuncionarios();
         d2.listarFuncionarios();
         
-        FolhaPagamento f1 = new FolhaPagamento(Mes.JANEIRO);
+        FolhaPagamento f1 = new FolhaPagamento(Mes.JANEIRO,d1);
         
-        f1.calcularTotalSalarios(d1);
+        f1.calcularTotalSalarios();
         
         System.out.println(d1.mediaVendaFuncionarios());
     }

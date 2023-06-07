@@ -1,7 +1,5 @@
 package main;
 
-import java.util.Date;
-
 public class Gerente extends Funcionario {
     private double bonus;
 

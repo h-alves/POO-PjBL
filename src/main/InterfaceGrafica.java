@@ -1,94 +1,68 @@
 package main;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 public class InterfaceGrafica extends JFrame {
-    public InterfaceGrafica() {
-        setTitle("PjBL");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
-        
+    private Departamento departamento;
+
+    public InterfaceGrafica(Departamento departamento) {
+        this.departamento = departamento;
+
+        Dimension buttonSize = new Dimension(200, 50);
+
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        add(mainPanel, BorderLayout.CENTER);
-        
-        JLabel titleLabel = new JLabel("posto de gasosa");
-        mainPanel.add(titleLabel);
-        
+        mainPanel.setLayout(new BorderLayout());
+
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(2, 2, 8, 8));
-        mainPanel.add(buttonPanel);
-        
-        JButton button1 = new JButton("Adicionar Funcionário");
-        button1.setForeground(Color.WHITE);
-        button1.setBackground(Color.BLUE);
-        button1.setOpaque(true);
-        button1.setBorderPainted(false);
-        button1.setFocusPainted(false);
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("a");
-            }
-        });
-        buttonPanel.add(button1);
-        
-        JButton button2 = new JButton("Remover Funcionário");
-        button2.setForeground(Color.WHITE);
-        button2.setBackground(Color.BLUE);
-        button2.setOpaque(true);
-        button2.setBorderPainted(false);
-        button2.setFocusPainted(false);
-        button2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("b");
-            }
-        });
-        buttonPanel.add(button2);
-        
-        JButton button3 = new JButton("Listar Funcionários");
-        button3.setForeground(Color.WHITE);
-        button3.setBackground(Color.BLUE);
-        button3.setOpaque(true);
-        button3.setBorderPainted(false);
-        button3.setFocusPainted(false);
-        button3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("c");
-            }
-        });
-        buttonPanel.add(button3);
-        
-        JButton button4 = new JButton("Média de Vendas");
-        button4.setForeground(Color.WHITE);
-        button4.setBackground(Color.BLUE);
-        button4.setOpaque(true);
-        button4.setBorderPainted(false);
-        button4.setFocusPainted(false);
-        button4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("d");
-            }
-        });
-        buttonPanel.add(button4);
-        
-        pack();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        JButton adicionarFuncionarioButton = new JButton("Adicionar Funcionário");
+        adicionarFuncionarioButton.addActionListener(e -> departamento.adicionarFuncionario(new Gerente("Fulano",100,"01-01-01",departamento,1000)));
+        adicionarFuncionarioButton.setPreferredSize(buttonSize);
+        adicionarFuncionarioButton.setMinimumSize(buttonSize);
+        buttonPanel.add(adicionarFuncionarioButton);
+
+        JButton listarFuncionariosButton = new JButton("Listar Funcionários");
+        listarFuncionariosButton.addActionListener(e -> departamento.listarFuncionarios());
+        listarFuncionariosButton.setPreferredSize(buttonSize);
+        listarFuncionariosButton.setMinimumSize(buttonSize);
+        buttonPanel.add(listarFuncionariosButton);
+
+        mainPanel.add(buttonPanel, BorderLayout.CENTER);
+
+        JPanel textPanel = new JPanel();
+        textPanel.setLayout(new BorderLayout());
+
+        JPanel innerTextPanel = new JPanel();
+        innerTextPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        JLabel centerTextLabel = new JLabel(departamento.getNome());
+        centerTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        innerTextPanel.add(centerTextLabel);
+
+        textPanel.add(innerTextPanel, BorderLayout.CENTER);
+
+        mainPanel.add(textPanel, BorderLayout.NORTH);
+
+        add(mainPanel);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 200);
         setLocationRelativeTo(null);
+        setResizable(false); // Impede redimensionamento
+        setVisible(true);
     }
-    
+
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                InterfaceGrafica frame = new InterfaceGrafica();
-                frame.setVisible(true);
-            }
-        });
+        Departamento departamento = new Departamento("Nome do Departamento");
+        InterfaceGrafica interfaceGrafica = new InterfaceGrafica(departamento);
     }
 }

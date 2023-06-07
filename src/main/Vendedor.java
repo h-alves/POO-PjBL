@@ -1,7 +1,5 @@
 package main;
 
-import java.util.Date;
-
 public class Vendedor extends Funcionario {
     private double valor_vendas;
     private int num_vendas;
