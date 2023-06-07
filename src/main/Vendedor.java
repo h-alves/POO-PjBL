@@ -10,10 +10,6 @@ public class Vendedor extends Funcionario {
         this.num_vendas = num_vendas;
     }
 
-    public double getVendas() {
-        return valor_vendas;
-    }
-
     public double calcularSalario() {
         return getSalario() + (valor_vendas * 0.1);
     }
@@ -32,6 +28,10 @@ public class Vendedor extends Funcionario {
     }
     
     //GETTERS:
+
+    public double getVendas() {
+        return valor_vendas;
+    }
     
     public double getValorVendas() {
     	return valor_vendas;
