@@ -1,7 +1,8 @@
-Guilherme, 10000, 17/11/2003, posto de gasosa
-Julia, 500, 10/03/2005, lojinha da cacau show
-Hask, 100, 18/1/2007, posto de gasosa
-Vinicius, 290, 22/07/2001, lojinha da cacau show
-Tuzza, 366, 31/12/2002, lojinha da cacau show
-Biruleibeleibe, 700, 13/05/1999, posto de gasosa
-Bella, 900, 14/02/2002, lojinha da cacau show
+cargo, nome, salario, dataNascimento, departamento, bonus, valorVendas, numVendas
+gerente, Guilherme, 10000, 17/11/2003, posto de gasosa, 300, 15, 10
+vendedor, Julia, 500, 10/03/2005, lojinha da cacau show, 200, 10, 9
+vendedor, Hask, 100, 18/1/2007, posto de gasosa, 180, 30, 8
+gerente, Vinicius, 290, 22/07/2001, lojinha da cacau show, 90, 12,  7
+gerente, Tuzza, 366, 31/12/2002, lojinha da cacau show, 80, 25, 6
+vendedor, Biruleibeleibe, 700, 13/05/1999, posto de gasosa, 800, 19, 5
+vendedor, Bella, 900, 14/02/2002, lojinha da cacau show, 360, 3, 4
