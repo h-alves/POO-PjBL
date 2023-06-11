@@ -1,11 +1,14 @@
 package main;
 
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         ScannerLeitor scanner = new ScannerLeitor();
-        List<List<String>> tabela = scanner.leituraDoArquivo("funcionarios.csv");
+        String fileName = "src/dados/funcionarios.csv";
+        List<List<String>> tabela = scanner.leituraDoArquivo(fileName);
+
+        Map<String, Departamento> departamentos = new HashMap<>();
 
         for (List<String> registro : tabela) {
             String cargo = registro.get(0);
@@ -17,19 +20,24 @@ public class Main {
             double valorVendas = Double.parseDouble(registro.get(6));
             int numVendas = Integer.parseInt(registro.get(7));
 
-            Departamento departamento = new Departamento(departamentoNome);
-            Funcionario funcionario;
+            Departamento departamento;
+            if (departamentos.containsKey(departamentoNome)) {
+                departamento = departamentos.get(departamentoNome);
+            } else {
+                departamento = new Departamento(departamentoNome);
+                departamentos.put(departamentoNome, departamento);
+            }
 
+            Funcionario funcionario;
             if (cargo.equals("Vendedor")) {
                 funcionario = new Vendedor(nome, salario, dataNascimento, departamento, valorVendas, numVendas);
-            } else if (cargo.equals("Gerente")) {
-                funcionario = new Gerente(nome, salario, dataNascimento, departamento, bonus);
             } else {
-                continue; // Skip invalid records
+                funcionario = new Gerente(nome, salario, dataNascimento, departamento, bonus);
             }
 
             departamento.adicionarFuncionario(funcionario);
         }
+
 
         Departamento d1 = new Departamento("posto de gasosa");
         Departamento d2 = new Departamento("lojinha da cacau show");
