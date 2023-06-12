@@ -31,14 +31,6 @@ public class ScannerLeitor {
             e.printStackTrace();
         }
 
-        for (List<String> registro : tabela) {
-            for (String campo : registro) {
-                System.out.print(campo + " ");
-            }
-            System.out.println();
-        }
-
         return tabela;
     }
 }
-

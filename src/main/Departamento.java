@@ -1,10 +1,9 @@
 package main;
 
 import java.io.*;
-import java.sql.Time;
 import java.util.ArrayList;
 
-public class Departamento implements Serializable {
+public class Departamento implements Serializable{
     private String nome;
     private ArrayList<Gerente> gerentes;
     private ArrayList<Vendedor> vendedores;
@@ -32,7 +31,7 @@ public class Departamento implements Serializable {
     }
 
     public void listarFuncionarios(){
-    	System.out.println("=-=-=-=-=-=-=-=-"+this.getNome()+"-=-=-=-=-=-=-=-=");
+    	//System.out.println("=-=-=-=-=-=-=-=-"+this.getNome()+"-=-=-=-=-=-=-=-=");
     	
     	if(gerentes.size() > 0) {
     		System.out.println("Gerentes:");
@@ -49,14 +48,14 @@ public class Departamento implements Serializable {
     		System.out.println();
     	}
     	
-	    System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
+	    //System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
     }
 
     public double mediaVendaFuncionarios(){
     	double total_vendas = 0;
     	
         for (Vendedor v: vendedores){
-            total_vendas += v.getVendas();
+            total_vendas += v.getValorVendas();
         }
         
         return total_vendas/vendedores.size();
@@ -81,7 +80,7 @@ public class Departamento implements Serializable {
     public void setNome(String nome) {
     	this.nome = nome;
     }
-
+    
     //Funções das persistencias
 
     public void salvar(String nome_arquivo) throws IOException {
@@ -103,5 +102,4 @@ public class Departamento implements Serializable {
 
         return departamento;
     }
-
 }

@@ -1,13 +1,9 @@
 package main;
 
 import java.io.*;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class FolhaPagamento implements Serializable {
+public class FolhaPagamento implements Serializable{
 	private Mes mes;
     private double total_salarios;
     private Departamento departamento;
@@ -18,7 +14,7 @@ public class FolhaPagamento implements Serializable {
         this.departamento = departamento;
     }
 
-    public void calcularTotalSalarios() {
+    public double calcularTotalSalarios() {
     	ArrayList<Gerente> gerentes = departamento.getGerentes();
     	ArrayList<Vendedor> vendedores = departamento.getVendedores();
     	
@@ -31,7 +27,7 @@ public class FolhaPagamento implements Serializable {
         }
         this.total_salarios = total_salarios;
         
-        System.out.println("Folha de Pagamento ("+mes.name().toLowerCase()+"): "+total_salarios);
+        return total_salarios;
     }
     
     //GETTERS:
@@ -44,6 +40,10 @@ public class FolhaPagamento implements Serializable {
     	return total_salarios;
     }
     
+    public Departamento getDepartamento() {
+    	return departamento;
+    }
+    
     //SETTERS:
     
     public void setMes(Mes mes) {
@@ -53,7 +53,7 @@ public class FolhaPagamento implements Serializable {
     public void setTotalSalarios(double total_salarios) {
     	this.total_salarios = total_salarios;
     }
-
+    
     //Funções das persistencias
 
     public void salvar(String nome_arquivo) throws IOException {
@@ -77,5 +77,4 @@ public class FolhaPagamento implements Serializable {
         arquivo.close();
         return folhaPagamento;
     }
-
 }
