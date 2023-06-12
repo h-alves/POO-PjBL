@@ -1,9 +1,8 @@
 package main;
-
 import java.io.*;
 import java.util.ArrayList;
 
-public class Departamento implements Serializable{
+public class Departamento implements Serializable {
     private String nome;
     private ArrayList<Gerente> gerentes;
     private ArrayList<Vendedor> vendedores;
@@ -14,74 +13,76 @@ public class Departamento implements Serializable{
         this.vendedores = new ArrayList<>();
     }
 
-    public void adicionarFuncionario(Funcionario funcionario) {
-        if(funcionario instanceof Gerente) {
-        	gerentes.add((Gerente) funcionario);
-        }else if (funcionario instanceof Vendedor) {
-        	vendedores.add((Vendedor) funcionario);
+    public void adicionarFuncionario(String cargo, String nome, double salario, String dataNascimento, double bonus, double valorVendas, int numVendas) {
+        if (cargo.equals("Vendedor")) {
+            Vendedor vendedor = new Vendedor(nome, salario, dataNascimento, this, valorVendas, numVendas);
+            vendedores.add(vendedor);
+        } else {
+            Gerente gerente = new Gerente(nome, salario, dataNascimento, this, bonus);
+            gerentes.add(gerente);
         }
     }
 
     public void removerFuncionario(Funcionario funcionario) {
-    	if(funcionario instanceof Gerente && gerentes.contains(funcionario)) {
-    		gerentes.remove(funcionario);
-    	}else if(funcionario instanceof Vendedor && vendedores.contains(funcionario)) {
-    		vendedores.remove(funcionario);
-    	}
-    }
-
-    public void listarFuncionarios(){
-    	//System.out.println("=-=-=-=-=-=-=-=-"+this.getNome()+"-=-=-=-=-=-=-=-=");
-    	
-    	if(gerentes.size() > 0) {
-    		System.out.println("Gerentes:");
-    		for(Gerente g: gerentes) {
-    			System.out.println(g.getNome() + "(" + g.getDataNascimento() + ")" + ": " + g.getSalario());
-    		}
-    		System.out.println();
-    	}
-    	if(vendedores.size() > 0) {
-    		System.out.println("Vendedores:");
-    		for(Vendedor v: vendedores) {
-    			System.out.println(v.getNome() + "(" + v.getDataNascimento() + ")" + ": " + v.getSalario());
-    		}
-    		System.out.println();
-    	}
-    	
-	    //System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
-    }
-
-    public double mediaVendaFuncionarios(){
-    	double total_vendas = 0;
-    	
-        for (Vendedor v: vendedores){
-            total_vendas += v.getValorVendas();
+        if (funcionario instanceof Gerente && gerentes.contains(funcionario)) {
+            gerentes.remove(funcionario);
+        } else if (funcionario instanceof Vendedor && vendedores.contains(funcionario)) {
+            vendedores.remove(funcionario);
         }
-        
-        return total_vendas/vendedores.size();
-    }
-    
-    //GETTERS:
-    
-    public String getNome(){
-    	return nome;
     }
 
-    public ArrayList<Gerente> getGerentes(){
+    public void listarFuncionarios() {
+        if (gerentes.size() > 0) {
+            System.out.println("Gerentes:");
+            for (Gerente g : gerentes) {
+                System.out.println(g.getNome() + "(" + g.getDataNascimento() + ")" + ": " + g.getSalario());
+            }
+            System.out.println();
+        }
+        if (vendedores.size() > 0) {
+            System.out.println("Vendedores:");
+            for (Vendedor v : vendedores) {
+                System.out.println(v.getNome() + "(" + v.getDataNascimento() + ")" + ": " + v.getSalario());
+            }
+            System.out.println();
+        }
+    }
+
+    public double mediaVendaFuncionarios() {
+        double totalVendas = 0;
+
+        for (Vendedor v : vendedores) {
+            totalVendas += v.getValorVendas();
+        }
+
+        if (vendedores.size() > 0) {
+            return totalVendas / vendedores.size();
+        } else {
+            return 0;
+        }
+    }
+
+    // GETTERS:
+
+    public String getNome() {
+        return nome;
+    }
+
+    public ArrayList<Gerente> getGerentes() {
         return gerentes;
     }
 
-    public ArrayList<Vendedor> getVendedores(){
+    public ArrayList<Vendedor> getVendedores() {
         return vendedores;
     }
-    
-    //SETTERS:
-    
+
+    // SETTERS:
+
     public void setNome(String nome) {
-    	this.nome = nome;
+        this.nome = nome;
     }
-    
-    //Funções das persistencias
+
+    // Funções de persistência
 
     public void salvar(String nome_arquivo) throws IOException {
         FileOutputStream arquivo = new FileOutputStream(nome_arquivo);

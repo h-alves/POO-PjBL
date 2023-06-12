@@ -13,22 +13,24 @@ abstract class Funcionario {
         this.salario = salario;
         this.data_nascimento = data_nascimento;
         this.departamento = departamento;
-        departamento.adicionarFuncionario(this);
+        setDepartamento(departamento);
     }
 
     public double calcularSalarioAnual(){
         return salario*12;
     }
 
-    public void trocarDepartamento(Departamento departamento_novo){
-    	Departamento departamento_antigo = this.getDepartamento();
-    	this.departamento = departamento_novo;
+
+    // FUNÇÃO NAO ESTA SENDO USADA NO MOMENTO
+    // public void trocarDepartamento(Departamento departamento_novo){
+    // 	Departamento departamento_antigo = this.getDepartamento();
+    // 	this.departamento = departamento_novo;
     	
-    	departamento_antigo.removerFuncionario(this);
-    	departamento_novo.adicionarFuncionario(this);
+    // 	departamento_antigo.removerFuncionario(this);
+    // 	departamento_novo.adicionarFuncionario(this); AQUI ELE ESTA COM PROBLEMAS
         
-        System.out.println(this.getNome()+" trocou para o departamento "+departamento_novo.getNome());
-    }
+    //     System.out.println(this.getNome()+" trocou para o departamento "+departamento_novo.getNome());
+    // }
 
     public abstract double calcularSalario();
 
@@ -62,6 +64,10 @@ abstract class Funcionario {
     
     public void setDataNascimento(String data_nascimento) {
     	this.data_nascimento = data_nascimento;
+    }
+
+    private void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
     
 }

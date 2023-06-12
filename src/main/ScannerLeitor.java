@@ -9,6 +9,7 @@ import java.util.List;
 public class ScannerLeitor {
     private String separador = ",";
     private List<List<String>> tabela = new ArrayList<>();
+    private boolean hasReadFile = false;
 
     public List<List<String>> leituraDoArquivo(String fileName) {
         try {
@@ -27,10 +28,20 @@ public class ScannerLeitor {
             buffer.close();
             arquivo.close();
 
+            hasReadFile = true; // Atualiza o indicador de leitura do arquivo
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        return tabela;
+    }
+
+    public boolean hasReadFile(String fileName) {
+        return hasReadFile && tabela.size() > 0;
+    }
+
+    public List<List<String>> getTabela() {
         return tabela;
     }
 }

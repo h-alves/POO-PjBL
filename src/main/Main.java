@@ -10,8 +10,7 @@ public class Main {
         ScannerLeitor scanner = new ScannerLeitor();
 
         // Caminho do arquivo CSV
-        String fileName = "D:\\area de trabalho\\PUCPR\\3º SEMESTRE 2023\\1 - Programação Orientada a Objetos\\PJBL\\GIT\\POO-PjBL\\src\\main\\funcionarios.csv";
-
+        String fileName = "./src/main/funcionarios.csv";
         // Lendo o arquivo e obtendo a tabela de dados
         List<List<String>> tabela = scanner.leituraDoArquivo(fileName);
 
@@ -43,16 +42,8 @@ public class Main {
                 departamentos.put(departamentoNome, departamento);
             }
 
-            // Criando o funcionário com base no cargo
-            Funcionario funcionario;
-            if (cargo.equals("Vendedor")) {
-                funcionario = new Vendedor(nome, salario, dataNascimento, departamento, valorVendas, newNumVendas);
-            } else {
-                funcionario = new Gerente(nome, salario, dataNascimento, departamento, bonus);
-            }
-
             // Adicionando o funcionário ao departamento
-            departamento.adicionarFuncionario(funcionario);
+            departamento.adicionarFuncionario(cargo, nome, salario, dataNascimento, bonus, valorVendas, newNumVendas);
         }
 
         // Executando a interface gráfica em uma thread separada
