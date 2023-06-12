@@ -5,7 +5,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         ScannerLeitor scanner = new ScannerLeitor();
-        String fileName = "src/dados/funcionarios.csv";
+        String fileName = "D:\\area de trabalho\\PUCPR\\3\u00BA SEMESTRE 2023\\1 - Programa\u00E7\u00E3o Orientada a Objetos\\PJBL\\GIT\\POO-PjBL\\src\\main\\funcionarios.csv";
         List<List<String>> tabela = scanner.leituraDoArquivo(fileName);
 
         Map<String, Departamento> departamentos = new HashMap<>();
@@ -18,7 +18,9 @@ public class Main {
             String departamentoNome = registro.get(4);
             double bonus = Double.parseDouble(registro.get(5));
             double valorVendas = Double.parseDouble(registro.get(6));
-            int numVendas = Integer.parseInt(registro.get(7));
+            String numVendas = registro.get(7).trim();
+
+            int newNumVendas = Integer.parseInt(numVendas);
 
             Departamento departamento;
             if (departamentos.containsKey(departamentoNome)) {
@@ -30,7 +32,7 @@ public class Main {
 
             Funcionario funcionario;
             if (cargo.equals("Vendedor")) {
-                funcionario = new Vendedor(nome, salario, dataNascimento, departamento, valorVendas, numVendas);
+                funcionario = new Vendedor(nome, salario, dataNascimento, departamento, valorVendas, newNumVendas);
             } else {
                 funcionario = new Gerente(nome, salario, dataNascimento, departamento, bonus);
             }
@@ -39,51 +41,51 @@ public class Main {
         }
 
 
-        Departamento d1 = new Departamento("posto de gasosa");
-        Departamento d2 = new Departamento("lojinha da cacau show");
+       Departamento d1 = new Departamento("posto de gasosa");
+       Departamento d2 = new Departamento("lojinha da cacau show");
 
-        Gerente g1 = new Gerente("Vinicius", 100, "01-01-01", d1, 1000);
-        Vendedor v1 = new Vendedor("Pedrao", 100, "01-01-01", d1, 200, 12);
-        Gerente g2 = new Gerente("Hask", 150, "01-01-01", d1, 1000);
-        Gerente g3 = new Gerente("Julia", 30, "01-01-01", d1, 200);
-        Vendedor v2 = new Vendedor("Bruno", 150, "01-01-01", d1, 200, 12);
+       Gerente g1 = new Gerente("Vinicius", 100, "01-01-01", d1, 1000);
+       Vendedor v1 = new Vendedor("Pedrao", 100, "01-01-01", d1, 200, 12);
+       Gerente g2 = new Gerente("Hask", 150, "01-01-01", d1, 1000);
+       Gerente g3 = new Gerente("Julia", 30, "01-01-01", d1, 200);
+       Vendedor v2 = new Vendedor("Bruno", 150, "01-01-01", d1, 200, 12);
 
-        d1.listarFuncionarios();
+       d1.listarFuncionarios();
 
-        System.out.print("Média de vendas do " + v1.getNome() + ": ");
-        try {
-            System.out.printf("%.2f\n", v1.mediaVenda());
-        } catch (ExcecaoVendedorSemVendas e) {
-            System.out.println(0);
-        }
+       System.out.print("Média de vendas do " + v1.getNome() + ": ");
+       try {
+           System.out.printf("%.2f\n", v1.mediaVenda());
+       } catch (ExcecaoVendedorSemVendas e) {
+           System.out.println(0);
+       }
 
-        System.out.println("Salário do " + v2.getNome() + ": " + v2.calcularSalario());
+       System.out.println("Salário do " + v2.getNome() + ": " + v2.calcularSalario());
 
-        v2.realizarVenda(7450);
+       v2.realizarVenda(7450);
 
-        System.out.print("Média de vendas do " + v2.getNome() + ": ");
-        try {
-            System.out.printf("%.2f\n", v2.mediaVenda());
-        } catch (ExcecaoVendedorSemVendas e) {
-            System.out.println(0);
-        }
+       System.out.print("Média de vendas do " + v2.getNome() + ": ");
+       try {
+           System.out.printf("%.2f\n", v2.mediaVenda());
+       } catch (ExcecaoVendedorSemVendas e) {
+           System.out.println(0);
+       }
 
-        System.out.println("Salário do " + g1.getNome() + ": " + g1.calcularSalario());
+       System.out.println("Salário do " + g1.getNome() + ": " + g1.calcularSalario());
 
-        System.out.println("Salário anual do " + g1.getNome() + ": " + g1.calcularSalarioAnual());
+       System.out.println("Salário anual do " + g1.getNome() + ": " + g1.calcularSalarioAnual());
 
-        g3.trocarDepartamento(d2);
-        v2.trocarDepartamento(d2);
+       g3.trocarDepartamento(d2);
+       v2.trocarDepartamento(d2);
 
-        System.out.println("Salário do " + g2.getNome() + ": " + g2.calcularSalario());
+       System.out.println("Salário do " + g2.getNome() + ": " + g2.calcularSalario());
 
-        d1.listarFuncionarios();
-        d2.listarFuncionarios();
+       d1.listarFuncionarios();
+       d2.listarFuncionarios();
 
-        FolhaPagamento f1 = new FolhaPagamento(Mes.JANEIRO, d1);
+       FolhaPagamento f1 = new FolhaPagamento(Mes.JANEIRO, d1);
 
-        f1.calcularTotalSalarios();
+       f1.calcularTotalSalarios();
 
-        System.out.println(d1.mediaVendaFuncionarios());
+       System.out.println(d1.mediaVendaFuncionarios());
     }
 }
